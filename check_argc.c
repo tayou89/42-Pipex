@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   check_argc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 12:32:18 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/11 00:59:44 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/10 22:11:40 by tayou             #+#    #+#             */
+/*   Updated: 2023/05/10 22:11:54 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+void	check_argc(int argc)
 {
-	t_data	data;
-
-	check_argc(argc);
-	get_initial_data(argv, envp, &data);
-	make_file_1_to_standard_input(&data);
-	execute_cmd(data.initial.cmd_1, &data);
-	system("leaks pipex");
-	return (0);
+	if (argc != 5)
+	{
+		ft_printf("Error.\n");
+		ft_printf("Wrong argument count.\n");
+		exit(0);
+	}
 }
