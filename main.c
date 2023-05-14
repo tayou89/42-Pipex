@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "pipex.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
-
-	line = get_next_line(0);
-	return (0);
+	if (argc 
 }
-
