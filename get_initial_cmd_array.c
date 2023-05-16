@@ -1,43 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_initial_data.c                                 :+:      :+:    :+:   */
+/*   get_initial_cmd_array.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 22:12:14 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/16 23:49:11 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/16 23:49:33 by tayou             #+#    #+#             */
+/*   Updated: 2023/05/16 23:53:13 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	get_initial_data(int argc, char **argv, char **envp, t_data *data)
-{
-	get_pipe_fd(data);
-	data->initial.argc = argc;
-	data->initial.argv = argv;
-	data->initial.file_1 = argv[1];
-	data->initial.file_2 = argv[argc - 1];
-	data->initial.envp = envp;
-	data->cmd.array = (void *) 0;
-	data->cmd.split_array = (void *) 0;
-	data->cmd.directory = (void *) 0;
-	data->cmd.path = (void *) 0;
-	get_initial_cmd_array(data);
-}
-
-void	get_pipe_fd(t_data *data)
-{
-	int	pipe_return;
-
-	pipe_return = pipe(data->fd.pipe);
-	if (pipe_return == -1)
-	{
-		ft_printf("Pipe function is failed.\n");
-		exit(1);
-	}
-}
+void	get_cmd_count(t_data *data);
+void	malloc_initial_cmd_array(t_data *data);
+void	fill_initial_cmd_array(t_data *data);
 
 void	get_initial_cmd_array(t_data *data)
 {

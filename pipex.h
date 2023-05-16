@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:31:07 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/15 00:13:03 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/17 00:55:42 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,32 @@
 # include <unistd.h>
 # include "./libft/libft.h"
 
-# define RDONLY		0
-# define STDIN		0
+# define RDONLY			0
+# define WRONLY			1
+# define STDIN			0
+# define STDOUT			1
+# define FILE_OK		0
+# define EXEC_OK		1
 
-# define TRUE		1
-# define FALSE		0
+# define TRUE			1
+# define FALSE			0
+
+# define MALLOC_ERROR	10
+# define EXECVE_ERROR	11
+# define CMD_ERROR		12
+# define FORK_ERROR		13
+# define OPEN_ERROR		14
 
 typedef struct s_cmd
 {
 	char	**array;
+	char	**split_array;
+	char	**directory;
+	char	*path;
 	int		count;
 	int		start_index;
 	int		last_index;
-}
+}	t_cmd;
 
 typedef struct s_initial
 {
@@ -39,7 +52,6 @@ typedef struct s_initial
 	char	*file_1;
 	char	*file_2;
 	char	**envp;
-	t_cmd	cmd;
 }	t_initial;
 
 typedef struct s_fd
@@ -49,30 +61,20 @@ typedef struct s_fd
 	int	pipe[2];	
 }	t_fd;
 
-typedef struct s_array
-{
-	char	**cmd;
-	char	**cmd_directory;
-}	t_array;
-
-typedef struct s_message
-{
-	char	*malloc_error;
-}	t_message;
-
 typedef struct s_data
 {
 	t_initial	initial;
 	t_fd		fd;
-	t_array		array;
-	t_message	error
+	t_cmd		cmd;
 }	t_data;
 
 void	check_argc(int argc);
 void	get_initial_data(int argc, char **argv, char **envp, t_data *data);
+void	get_initial_cmd_array(t_data *data);
 void	make_file_1_to_standard_input(t_data *data);
 void	execute_cmd(char *cmd, t_data *data);
 
+void	free_every_mallocated_data(t_data *data);
 void	free_2d_array(char **array);
 
 void	print_2d_array(char **array);

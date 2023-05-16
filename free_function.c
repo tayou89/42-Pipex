@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 00:24:15 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/16 23:23:53 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/16 23:23:39 by tayou             #+#    #+#             */
+/*   Updated: 2023/05/16 23:52:15 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	free_every_mallocated_data(t_data *data)
 {
 	if (data->cmd.array != (void *) 0)
 		free_2d_array(data->cmd.array);
+	if (data->cmd.split_array != (void *) 0)
+		free_2d_array(data->cmd.split_array);
+	if (data->cmd.directory != (void *) 0)
+		free_2d_array(data->cmd.directory);
+
 }
 
 void	free_2d_array(char **array)
