@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:31:07 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/17 00:55:42 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/17 23:49:59 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,19 @@
 # include "./libft/libft.h"
 
 # define RDONLY			0
-# define WRONLY			1
+# define RDWR			2
+# define CREAT			512
+# define TRUNC			1024
+# define FILE_MODE		0666
+
 # define STDIN			0
 # define STDOUT			1
+
 # define FILE_OK		0
 # define EXEC_OK		1
+
+# define READ			0
+# define WRITE			1
 
 # define TRUE			1
 # define FALSE			0
@@ -33,6 +41,8 @@
 # define CMD_ERROR		12
 # define FORK_ERROR		13
 # define OPEN_ERROR		14
+# define WAIT_ERROR		15
+# define CLOSE_ERROR	16
 
 typedef struct s_cmd
 {
@@ -57,15 +67,17 @@ typedef struct s_initial
 typedef struct s_fd
 {
 	int	file_1;
-	int	new_file_1;
-	int	pipe[2];	
+	int	pipe[2];
 }	t_fd;
 
 typedef struct s_data
 {
 	t_initial	initial;
-	t_fd		fd;
 	t_cmd		cmd;
+	t_fd		fd;
+	pid_t		pid;
+	int			child_number;
+	int			stat_loc;
 }	t_data;
 
 void	check_argc(int argc);
