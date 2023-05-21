@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:32:18 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/17 23:49:26 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:59:14 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,18 @@ int	main(int argc, char **argv, char **envp)
 	else if (data.pid == 0)
 		execute_child_process(data);
 	change_fd(data.fd.pipe[READ], STDOUT, &data);
-	open_file_2(&data);
+	fill_outfile(&data);
 	return (0);
 }
 
-void	open_file_1(t_data *data)
+void	open_file(t_data *data)
 {
-	data->fd.file_2 = \
-		open(data->initial.file_2, RDWR | CREAT | TRUNC, FILE_MODE);
-	if (data->fd.file_2 == -1)
+	data->fd.outfile = \
+		open(data->initial.outfile, RDWR | CREAT | TRUNC, FILE_MODE);
+	if (data->fd.outfile == -1)
 		execute_error_process(OPEN_ERROR, data);
-	data->fd.file_1 = open(data->initial.file_1, RDONLY);
-	if (data->fd.file_1 == -1)
-		execute_error_process(OPEN_ERROR, data);
+	data->fd.infile = open(data->initial.infile, RDONLY);
 }
-
-void	open_file_2(t_data *data)
-{
-	data->fd.file_2 = open(data->initial.file_2, RDWR | CREAT
 
 void	change_fd(int original_fd, int fd_to_change, t_data *data)
 {
@@ -101,4 +95,21 @@ void	execute_child_process(t_data *data)
 			execute_error_process(CLOSE_ERROR, data);
 	}
 	execute_cmd(data->cmd.array[child_number], data);
+}
+
+void	fill_outfile(t_data *data)
+{
+	char	buffer[BUFFER_SIZE];
+	int		read_size;
+
+	read_size = read(STDOUT, buffer, BUFFER_SIZE);
+	if (read_size == -1)
+		execute_error_process(READ_ERROR, data);
+	while (read_size > 0)
+	{
+		read_size = read(STDOUT, buffer, BUFFER_SIZE);
+		if (read_size == -1)
+			excute_error_process(READ_ERROR, data);
+	}
+}
 }

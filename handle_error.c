@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:42:01 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/17 14:44:10 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:40:00 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	print_error_message(int	error_number)
 		ft_printf("Error.\nFunction fork failed.\n");
 	else if (error_number == OPEN_ERROR)
 		ft_printf("Error.\nFile open failed.\n");
+	else if (error_number == READ_ERROR)
+		ft_printf("Error.\nReading file failed.\n");
 }

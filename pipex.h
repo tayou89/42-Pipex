@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:31:07 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/17 23:49:59 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:34:23 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define CREAT			512
 # define TRUNC			1024
 # define FILE_MODE		0666
+# define BUFFER_SIZE	10;
 
 # define STDIN			0
 # define STDOUT			1
@@ -43,6 +44,7 @@
 # define OPEN_ERROR		14
 # define WAIT_ERROR		15
 # define CLOSE_ERROR	16
+# define READ_ERROR		17
 
 typedef struct s_cmd
 {
@@ -59,8 +61,8 @@ typedef struct s_initial
 {
 	int		argc;
 	char	**argv;
-	char	*file_1;
-	char	*file_2;
+	char	*infile;
+	char	*outfile;
 	char	**envp;
 }	t_initial;
 
@@ -78,6 +80,7 @@ typedef struct s_data
 	pid_t		pid;
 	int			child_number;
 	int			stat_loc;
+	int			output_line_count;
 }	t_data;
 
 void	check_argc(int argc);
