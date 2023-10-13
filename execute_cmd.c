@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 00:23:21 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/16 23:55:46 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 21:53:33 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	execute_cmd(char *cmd, t_data *data)
 	get_cmd_directory_and_split_array(cmd, data);
 	find_cmd_path(data);
 	execve_return = \
-		execve(data->cmd.path, data->cmd.split_array, data->initial.envp);
-	if (execve_return = -1)
+		execve(data->cmd.path, data->cmd.split_array, data->args.envp);
+	if (execve_return == -1)
 		execute_error_process(EXECVE_ERROR, data);
 	free_unnecessary_data(data);
 }
@@ -35,8 +35,8 @@ void	get_cmd_directory_and_split_array(char *cmd, t_data *data)
 	char	*directory_array;
 	int		path_index;
 
-	find_path_index_from_envp(&path_index, data->initial.envp);
-	directory_array = (ft_strchr(data->initial.envp[path_index], '=') + 1);
+	find_path_index_from_envp(&path_index, data->args.envp);
+	directory_array = (ft_strchr(data->args.envp[path_index], '=') + 1);
 	data->cmd.directory = ft_split(directory_array, ':');
 	if (data->cmd.directory == (void *) 0)
 		execute_error_process(MALLOC_ERROR, data);
@@ -82,7 +82,8 @@ void	find_cmd_path(t_data *data)
 			execute_error_process(MALLOC_ERROR, data);
 		free(initial_path);
 		initial_path = (void *) 0;
-		if (access(final_path, F_OK) == 0 && access(final_path, X_OK) == 0)
+		if (access(data->cmd.path, F_OK) == 0
+			&& access(data->cmd.path, X_OK) == 0)
 			break ;
 		free(data->cmd.path);
 		data->cmd.path = (void *) 0;

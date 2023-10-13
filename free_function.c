@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:23:39 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/16 23:52:15 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 22:22:39 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	free_every_mallocated_data(t_data *data)
 		free_2d_array(data->cmd.split_array);
 	if (data->cmd.directory != (void *) 0)
 		free_2d_array(data->cmd.directory);
-
 }
 
 void	free_2d_array(char **array)

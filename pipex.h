@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:31:07 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/21 17:34:23 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/21 22:37:16 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define RDWR			2
 # define CREAT			512
 # define TRUNC			1024
-# define FILE_MODE		0666
-# define BUFFER_SIZE	10;
 
 # define STDIN			0
 # define STDOUT			1
@@ -33,6 +31,9 @@
 
 # define READ			0
 # define WRITE			1
+
+# define INFILE			0
+# define OUTFILE		1
 
 # define TRUE			1
 # define FALSE			0
@@ -45,6 +46,8 @@
 # define WAIT_ERROR		15
 # define CLOSE_ERROR	16
 # define READ_ERROR		17
+# define DUP_ERROR		18
+# define PIPE_ERROR		19
 
 typedef struct s_cmd
 {
@@ -57,37 +60,51 @@ typedef struct s_cmd
 	int		last_index;
 }	t_cmd;
 
-typedef struct s_initial
+typedef struct s_args
 {
 	int		argc;
 	char	**argv;
+	char	**envp;
+}	t_args;
+
+typedef struct s_path
+{
 	char	*infile;
 	char	*outfile;
-	char	**envp;
-}	t_initial;
+}	t_path;
 
 typedef struct s_fd
 {
-	int	file_1;
+	int	infile;
+	int	outfile;
 	int	pipe[2];
 }	t_fd;
 
 typedef struct s_data
 {
-	t_initial	initial;
-	t_cmd		cmd;
-	t_fd		fd;
-	pid_t		pid;
-	int			child_number;
-	int			stat_loc;
-	int			output_line_count;
+	t_args	args;
+	t_path	path;
+	t_cmd	cmd;
+	t_fd	fd;
+	pid_t	pid;
 }	t_data;
 
 void	check_argc(int argc);
 void	get_initial_data(int argc, char **argv, char **envp, t_data *data);
 void	get_initial_cmd_array(t_data *data);
-void	make_file_1_to_standard_input(t_data *data);
+
+void	make_infile_to_standard_input(t_data *data);
+
 void	execute_cmd(char *cmd, t_data *data);
+
+void	open_file(char *file_path, int file_type, t_data *data);
+void	change_fd(int fd_to_change, int target_fd, t_data *data);
+void	close_fd(int fd_to_close, t_data *data);
+void	get_pipe_fd(t_data *data);
+void	produce_child_process(t_data *data);
+void	wait_child_process(pid_t pid, t_data *data);
+
+void	execute_error_process(int error_number, t_data *data);
 
 void	free_every_mallocated_data(t_data *data);
 void	free_2d_array(char **array);

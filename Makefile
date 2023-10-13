@@ -6,7 +6,7 @@
 #    By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 22:14:06 by tayou             #+#    #+#              #
-#    Updated: 2023/05/16 23:53:05 by tayou            ###   ########.fr        #
+#    Updated: 2023/05/21 22:14:44 by tayou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,9 @@ LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
 SRC_FILE = pipex \
 		   check_argc get_initial_data get_initial_cmd_array \
-		   make_file_1_to_standard_input \
 		   execute_cmd \
-		   utils handle_error free_function \
-		   print_2d_array
+		   utils_1 utils_2 \
+		   handle_error free_function
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
@@ -40,7 +39,7 @@ fclean : clean
 re : fclean all
 
 $(NAME) : $(LIBFT) $(OBJ)
-	$(CC) $(CCFLAGS) -o $(NAME) $^
+	$(CC) $(CCFLAGS) -o $(NAME) $^ -g -fsanitize=address
 
 $(LIBFT) : 
 	make bonus -C $(LIBFT_DIR) all
