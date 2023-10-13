@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 22:04:31 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/03 22:04:14 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/31 23:49:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ void	split_directory_array(char *directory_array, t_data *data)
 {
 	data->cmd.directory = ft_split(directory_array, ':');
 	if (data->cmd.directory == (void *) 0)
-		execute_error_process((void *) 0, 1, data);
+	{
+		free_every_mallocated_data(data);
+		print_error_message(MALLOC_ERROR);
+		exit(1);
+	}
 }
 
 void	join_slash_to_each_directory(t_data *data)
@@ -68,7 +72,9 @@ void	join_slash_to_each_directory(t_data *data)
 		if (data->cmd.directory[i] == (void *) 0)
 		{
 			free(temp);
-			execute_error_process((void *) 0, 1, data);
+			free_every_mallocated_data(data);
+			print_error_message(MALLOC_ERROR);
+			exit(1);
 		}
 		free(temp);
 		i++;

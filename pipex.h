@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:31:07 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/08 12:58:23 by tayou            ###   ########.fr       */
+/*   Updated: 2023/06/01 11:13:19 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include <sys/wait.h>
 # include "./libft/libft.h"
 
 # define RDONLY			0
+# define WRONLY			1
 # define RDWR			2
 # define CREAT			512
 # define TRUNC			1024
@@ -45,8 +44,16 @@
 # define SUCCESS		1
 # define FAIL			0
 
-# define TRUE			1
-# define FALSE			0
+# define MALLOC_ERROR	10
+# define EXECVE_ERROR	11
+# define CMD_ERROR		12
+# define FORK_ERROR		13
+# define OPEN_ERROR		14
+# define WAIT_ERROR		15
+# define CLOSE_ERROR	16
+# define READ_ERROR		17
+# define DUP_ERROR		18
+# define PIPE_ERROR		19
 
 typedef struct s_cmd
 {
@@ -74,9 +81,17 @@ typedef struct s_path
 
 typedef struct s_fd
 {
-	int	file;
+	int	infile;
+	int	outfile;
 	int	pipe[2];
 }	t_fd;
+
+typedef struct s_flag
+{
+	int	open_infile;
+	int	open_outfile;
+	int	find_accessible_path;
+}	t_flag;
 
 typedef struct s_data
 {
@@ -84,24 +99,28 @@ typedef struct s_data
 	t_path	path;
 	t_cmd	cmd;
 	t_fd	fd;
+	t_flag	flag;
 	pid_t	*pid;
+	int		child_number;
 }	t_data;
 
 void	check_argc(int argc);
 void	make_initial_setting(int argc, char **argv, char **envp, t_data *data);
 void	get_cmd_array(t_data *data);
 void	get_cmd_directory_array(t_data *data);
+void	open_files(t_data *data);
 
-void	execute_cmd_in_parallel(t_data *data);
-void	execute_parent_process(t_data *data);
-void	execute_child_process(int index, t_data *data);
-void	get_cmd_path(char *cmd, t_data *data);
+void	execute_cmd_by_parallel_process(t_data *data);
+void	check_cmd_accessibility(char *cmd, t_data *data);
 
-void	change_fd(int fd_to_change, int target_fd);
-void	close_fd(int fd_to_close);
+void	change_fd(int fd_to_change, int target_fd, t_data *data);
+void	close_fd(int fd_to_close, t_data *data);
 void	get_pipe_fd(t_data *data);
-void	open_file(char *file_path, int file_type, t_data *data);
-void	execute_error_process(char *error, int exit_number, t_data *data);
+void	produce_child_process(int index, t_data *data);
+void	wait_every_child_process(t_data *data);
+
+void	execute_error_process(int error_number, int exit_number, t_data *data);
+void	print_error_message(int error_number);
 
 void	free_every_mallocated_data(t_data *data);
 void	free_2d_array(char **array);
