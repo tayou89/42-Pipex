@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 22:12:14 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/21 21:46:44 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/24 22:31:35 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@ void	get_initial_data(int argc, char **argv, char **envp, t_data *data)
 	data->cmd.split_array = (void *) 0;
 	data->cmd.directory = (void *) 0;
 	data->cmd.path = (void *) 0;
-	get_initial_cmd_array(data);
+	data->flag.open_infile = FAIL;
+	data->flag.open_outfile = FAIL;
+	data->flag.find_accessible_path = FAIL;
+	get_cmd_array(data);
+	get_cmd_directory_array(data);
 }

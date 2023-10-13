@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   print_2d_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 21:38:01 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/25 00:23:52 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/24 13:49:28 by tayou             #+#    #+#             */
+/*   Updated: 2023/05/24 13:50:50 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	wait_child_process(pid_t pid, t_data *data)
+void	print_2d_array(char **array)
 {
-	int	wait_return;
+	int	i;
 
-	wait_return = waitpid(pid, (void *) 0, NOHANG);
-	if (wait_return == -1)
-		execute_error_process(WAIT_ERROR, data);
+	if (array == (void *) 0)
+		return ;
+	i = 0;
+	while (array[i] != (void *) 0)
+	{
+		ft_printf("array[%d]: %s\n", i, array[i]);
+		i++;
+	}
 }
+

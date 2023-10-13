@@ -6,7 +6,7 @@
 #    By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 22:14:06 by tayou             #+#    #+#              #
-#    Updated: 2023/05/21 22:14:44 by tayou            ###   ########.fr        #
+#    Updated: 2023/05/25 00:21:35 by tayou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ RMFLAGS = -rf
 LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
 SRC_FILE = pipex \
-		   check_argc get_initial_data get_initial_cmd_array \
-		   execute_cmd \
+		   check_argc get_initial_data \
+		   get_cmd_array get_cmd_directory_array \
+		   check_cmd_accessibility \
 		   utils_1 utils_2 \
-		   handle_error free_function
+		   handle_error free_function \
+		   print_2d_array
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

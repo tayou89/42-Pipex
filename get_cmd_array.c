@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_initial_cmd_array.c                            :+:      :+:    :+:   */
+/*   get_cmd_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 23:49:33 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/21 22:21:06 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/24 21:26:47 by tayou             #+#    #+#             */
+/*   Updated: 2023/05/24 21:41:24 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_cmd_count(t_data *data);
 void	malloc_initial_cmd_array(t_data *data);
 void	fill_initial_cmd_array(t_data *data);
 
-void	get_initial_cmd_array(t_data *data)
+void	get_cmd_array(t_data *data)
 {
 	get_cmd_count(data);
 	malloc_initial_cmd_array(data);
@@ -64,4 +64,5 @@ void	fill_initial_cmd_array(t_data *data)
 		argv_index++;
 		i++;
 	}
+	data->cmd.array[i] = (void *) 0;
 }

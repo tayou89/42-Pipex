@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 21:37:24 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/21 22:37:13 by tayou            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:15:03 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ void	open_file(char *file_path, int file_type, t_data *data)
 	{
 		fd = open(file_path, RDONLY);
 		data->fd.infile = fd;
+		if (fd != -1)
+			data->flag.open_infile = SUCCESS;
 	}
 	else if (file_type == OUTFILE)
 	{
 		fd = open(file_path, RDWR | CREAT | TRUNC, 0666);
 		data->fd.outfile = fd;
+		if (fd != -1)
+			data->flag.open_outfile = SUCCESS;
 	}
 	if (fd == -1)
-		execute_error_process(OPEN_ERROR, data);
+		print_error_message(OPEN_ERROR);
 }
 
 void	change_fd(int fd_to_change, int target_fd, t_data *data)
