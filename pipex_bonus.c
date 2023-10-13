@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 21:38:01 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/25 00:23:52 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/28 22:05:16 by tayou             #+#    #+#             */
+/*   Updated: 2023/06/04 23:27:19 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	wait_child_process(pid_t pid, t_data *data)
+int	main(int argc, char **argv, char **envp)
 {
-	int	wait_return;
+	t_data	data;
 
-	wait_return = waitpid(pid, (void *) 0, NOHANG);
-	if (wait_return == -1)
-		execute_error_process(WAIT_ERROR, data);
+	check_heredoc_exist(argv, &data);
+	check_argc(argc, &data);
+	make_initial_setting(argc, argv, envp, &data);
+	execute_cmd_in_parallel(&data);
+	free_every_mallocated_data(&data);
+	return (0);
 }

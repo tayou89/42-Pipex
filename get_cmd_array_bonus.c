@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_array.c                                    :+:      :+:    :+:   */
+/*   get_cmd_array_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 21:26:47 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/03 21:59:14 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/28 22:04:12 by tayou             #+#    #+#             */
+/*   Updated: 2023/06/04 20:54:35 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	get_cmd_count(t_data *data);
 void	malloc_initial_cmd_array(t_data *data);
@@ -29,7 +29,10 @@ void	get_cmd_count(t_data *data)
 	int	start_index;
 
 	count = 0;
-	data->cmd.start_index = 2;
+	if (data->flag.heredoc_exist == TRUE)
+		data->cmd.start_index = 3;
+	else
+		data->cmd.start_index = 2;
 	data->cmd.last_index = data->args.argc - 2;
 	start_index = data->cmd.start_index;
 	while (start_index <= data->cmd.last_index)

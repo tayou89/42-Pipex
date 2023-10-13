@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_directory_array.c                          :+:      :+:    :+:   */
+/*   get_cmd_directory_array_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 21:28:09 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/03 22:03:18 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/28 22:04:31 by tayou             #+#    #+#             */
+/*   Updated: 2023/06/03 22:04:14 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	find_path_index_from_envp(int *path_index, char **envp);
 void	split_directory_array(char *directory_array, t_data *data);

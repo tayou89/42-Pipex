@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   check_argc_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 23:14:47 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/03 18:11:32 by tayou            ###   ########.fr       */
+/*   Created: 2023/05/28 22:02:18 by tayou             #+#    #+#             */
+/*   Updated: 2023/06/04 22:33:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
+void	check_argc(int argc, t_data *data)
 {
-	if (s == (void *) 0)
-		return (0);
-	while (*s != (char) c)
+	if (data->flag.heredoc_exist == TRUE)
 	{
-		if (*s == '\0')
-			return (0);
-		s++;
+		if (argc < 6)
+		{
+			ft_printf("Error.\n");
+			ft_printf("Wrong argument count.\n");
+			exit(0);
+		}
 	}
-	return ((char *) s);
+	else
+	{
+		if (argc < 5)
+		{
+			ft_printf("Error.\n");
+			ft_printf("Wrong argument count.\n");
+			exit(0);
+		}
+	}
 }
