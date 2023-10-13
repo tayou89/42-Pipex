@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   execute_cmd_in_parallel.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 23:14:47 by tayou             #+#    #+#             */
-/*   Updated: 2023/06/03 18:11:32 by tayou            ###   ########.fr       */
+/*   Created: 2023/06/04 22:29:56 by tayou             #+#    #+#             */
+/*   Updated: 2023/06/04 22:30:07 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strchr(const char *s, int c)
+void	execute_cmd_in_parallel(t_data *data)
 {
-	if (s == (void *) 0)
-		return (0);
-	while (*s != (char) c)
+	int	i;
+
+	i = 0;
+	while (i < data->cmd.count)
 	{
-		if (*s == '\0')
-			return (0);
-		s++;
+		data->pid[i] = fork();
+		if (data->pid[i] == -1)
+			perror("fork error");
+		if (data->pid[i] == 0)
+			execute_child_process(i, data);
+		i++;
 	}
-	return ((char *) s);
+	execute_parent_process(data);
 }

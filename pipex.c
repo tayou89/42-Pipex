@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:32:18 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/31 21:09:21 by tayou            ###   ########.fr       */
+/*   Updated: 2023/06/04 23:22:07 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	check_argc(argc);
 	make_initial_setting(argc, argv, envp, &data);
 	get_pipe_fd(&data);
-	execute_cmd_by_parallel_process(&data);
+	execute_cmd_in_parallel(&data);
 	free_every_mallocated_data(&data);
 	return (0);
 }

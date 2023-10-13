@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 21:26:47 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/28 16:22:07 by tayou            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:59:14 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	malloc_initial_cmd_array(t_data *data)
 		(char **) malloc(sizeof(char *) * (data->cmd.count + 1));
 	if (data->cmd.array == (void *) 0)
 	{
-		print_error_message(MALLOC_ERROR);
+		perror("");
 		exit(1);
 	}
 }
@@ -63,11 +63,7 @@ void	fill_initial_cmd_array(t_data *data)
 		data->cmd.array[i] = \
 			ft_strdup(data->args.argv[argv_index]);
 		if (data->cmd.array[i] == (void *) 0)
-		{
-			free_every_mallocated_data(data);
-			print_error_message(MALLOC_ERROR);
-			exit(1);
-		}
+			execute_error_process((void *) 0, 1, data);
 		argv_index++;
 		i++;
 	}

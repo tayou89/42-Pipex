@@ -6,7 +6,7 @@
 #    By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 22:14:06 by tayou             #+#    #+#              #
-#    Updated: 2023/06/01 11:13:02 by tayou            ###   ########.fr        #
+#    Updated: 2023/06/04 23:32:11 by tayou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,23 +22,21 @@ SRC_FILE = pipex \
 		   check_argc \
 		   make_initial_setting \
 		   get_cmd_array get_cmd_directory_array \
-		   open_files \
-		   execute_cmd_by_parallel_process \
-		   check_cmd_accessibility \
+		   execute_cmd_in_parallel \
+		   execute_parent_process execute_child_process \
+		   get_cmd_path \
 		   utils \
-		   execute_error_process free_function 
+		   free_function
 BONUS_FILE = pipex \
 		   check_argc \
 		   check_heredoc_exist \
 		   make_initial_setting \
-		   get_cmd_array get_cmd_directory_array \
-		   open_files \
-		   read_line_and_write_to_heredoc \
-		   execute_cmd_by_parallel_process \
-		   execute_child_process \
-		   check_cmd_accessibility \
+		   get_cmd_array get_cmd_directory_array make_heredoc_file \
+		   execute_cmd_in_parallel \
+		   execute_parent_process execute_child_process \
+		   get_cmd_path \
 		   utils \
-		   execute_error_process free_function 
+		   free_function 
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 SRC_BONUS = $(addsuffix _bonus.c, $(BONUS_FILE))

@@ -6,18 +6,11 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:23:39 by tayou             #+#    #+#             */
-/*   Updated: 2023/05/31 22:13:25 by tayou            ###   ########.fr       */
+/*   Updated: 2023/06/04 23:18:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	free_all_and_print_error_message(int error_number, t_data *data)
-{
-	free_every_mallocated_data(data);
-	print_error_message(error_number);
-	exit(1);
-}
 
 void	free_every_mallocated_data(t_data *data)
 {
