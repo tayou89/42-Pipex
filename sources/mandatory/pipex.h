@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "./libft/libft.h"
+# include "libft.h"
 
 # define RDONLY			0
 # define RDWR			2
