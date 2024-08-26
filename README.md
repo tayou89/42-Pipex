@@ -9,6 +9,7 @@ This project is part of the 42 school curriculum. It implements a program that s
 - [Usage](#usage)
 - [Examples](#examples)
 - [Bonus Features](#bonus-features)
+- [Makefile](#makefile)
 
 ## Description
 
@@ -80,4 +81,27 @@ This implementation includes the following bonus features:
    ```
    Equivalent to: `cmd << LIMITER | cmd1 >> file`
 
-For more details on usage and implementation, please refer to the project subject.
+## Makefile
+
+The project includes a Makefile for easy compilation and management. Here are the available commands:
+
+- `make`: Compiles the project and generates the executable.
+- `make all`: Same as `make`.
+- `make clean`: Removes object files.
+- `make fclean`: Removes object files and the executable.
+- `make re`: Performs a complete recompilation (equivalent to `make fclean` followed by `make`).
+- `make bonus`: Compiles the project with bonus features.
+
+The Makefile uses the following flags for compilation:
+- `-Wall`: Enables all compiler's warning messages.
+- `-Wextra`: Enables some extra warning flags not enabled by `-Wall`.
+- `-Werror`: Treats all warnings as errors.
+
+Example usage:
+```
+make        # Compile the project
+make clean  # Remove object files
+make bonus  # Compile with bonus features
+```
+
+For more details on usage and implementation, please refer to [the project subject](requirements/pipex.pdf).
